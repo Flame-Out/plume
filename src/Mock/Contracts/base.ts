@@ -5,7 +5,7 @@ export class ValidTesting4Tests0Notifications extends Notifiable {
   constructor() {
     super();
     this.AddNotification(
-      new Contract()
+      Contract("")
         .Equal(
           true,
           true,
@@ -38,7 +38,7 @@ export class InvalidTestings4Methods2Notifications extends Notifiable {
   constructor() {
     super();
     this.AddNotification(
-      new Contract()
+      Contract("")
         .Equal(
           true,
           true,
@@ -71,7 +71,7 @@ export class InvalidTestingsAllMethods extends Notifiable {
   constructor() {
     super();
     this.AddNotification(
-      new Contract()
+      Contract(4)
         .Equal(true, false, "ContractTestEqual", "Os valores não são iguais")
         .NotEqual(true, true, "ContractTestNotEqual", "Os valores são iguais")
         .StrictEqual(

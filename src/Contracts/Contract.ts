@@ -31,3 +31,5 @@ const Contracts = {
     return new a(value)
   }
 }
+
+export default Contract
