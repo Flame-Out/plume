@@ -1,34 +1,33 @@
 import { Notification } from "../Notifications";
+import BaseValidation from "../Validations/base"
+import StringValidation from "../Validations/string";
+class ContractBase<T> extends BaseValidation {
+  #notifications: Array<Notification> = [];
+  #value: T
 
-export default class Contract {
-  private _notifications: Array<Notification> = [];
-
+  constructor(value: T) {
+    super()
+    this.#value = value
+  }
   public get GetNotifications(): Array<Notification> {
-    return this._notifications;
+    return this.#notifications;
   }
+}
 
-  Equal(Value: any, Compare: any, Key: string, Message: string): this {
-    if (Value != Compare) {
-      this._notifications.unshift(new Notification(Key, Message));
-    }
-    return this;
-  }
-  NotEqual(Value: any, Compare: any, Key: string, Message: string): this {
-    if (Value == Compare) {
-      this._notifications.unshift(new Notification(Key, Message));
-    }
-    return this;
-  }
-  StrictEqual(Value: any, Compare: any, Key: string, Message: string): this {
-    if (Value !== Compare) {
-      this._notifications.unshift(new Notification(Key, Message));
-    }
-    return this;
-  }
-  StrictNotEqual(Value: any, Compare: any, Key: string, Message: string): this {
-    if (Value === Compare) {
-      this._notifications.unshift(new Notification(Key, Message));
-    }
-    return this;
+function Contract(value: string): ReturnType<typeof Contracts.string>
+function Contract(value: number): ReturnType<typeof Contracts.number>
+function Contract(value: any): any {
+  let result = Contracts[typeof value](value)
+  return result
+}
+
+const Contracts = {
+  "string": (value: string) => {
+    let a = StringValidation(ContractBase<string>)
+    return new a(value)
+  },
+  "number": (value: number) => {
+    let a = ContractBase<number>
+    return new a(value)
   }
 }
